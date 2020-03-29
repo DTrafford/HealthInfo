@@ -44,9 +44,18 @@ class ReplyCard extends Component {
   };
 
   onSubmit = () => {
+    const userName = this.props.user.firstName + " " + this.props.user.lastName;
     const newPost = this.state.post;
     console.log(newPost);
-    newPost.replies.push(this.state.replyMessage);
+    if (newPost.replies) {
+      newPost.replies.push({
+        user: userName,
+        replyMessage: this.state.replyMessage
+      });
+    } else {
+      newPost.replies = [this.state.replyMessage];
+    }
+
     this.props.addReply(newPost, this.props.user);
   };
 

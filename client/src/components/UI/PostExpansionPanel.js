@@ -30,15 +30,16 @@ function PostExpansionPanel(props) {
     <div className={classes.root}>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>
-            {props.post.title}
+          <Typography>
+            <span className={classes.heading}>{props.post.title}</span> - (
+            {props.post.creatorName})
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>{props.post.content}</Typography>
           {props.img ? <img src={props.img} alt="post img" /> : null}
         </ExpansionPanelDetails>
-        {props.post.replies.length >= 1 ? (
+        {props.post.replies && props.post.replies.length >= 1 ? (
           <React.Fragment>
             <ExpansionPanelDetails>
               <Typography
@@ -54,7 +55,11 @@ function PostExpansionPanel(props) {
             </ExpansionPanelDetails>
             <ExpansionPanelDetails>
               {props.post.replies.map(reply => {
-                return <Typography>{reply}</Typography>;
+                return (
+                  <Typography>
+                    {reply.replyMessage} - ({reply.user})
+                  </Typography>
+                );
               })}
             </ExpansionPanelDetails>
           </React.Fragment>
