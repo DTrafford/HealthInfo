@@ -1,7 +1,20 @@
 ///////////*****************//////// USERSTORE
 
 import { apiUrl } from "../../instances/instance";
-import { logIn, logOut, getPatients, createTip, getTips, deleteTip, createPost, getPosts, addResults, getPatient, getConditions } from "./function";
+import {
+  logIn,
+  logOut,
+  getPatients,
+  createTip,
+  getTips,
+  deleteTip,
+  createPost,
+  getPosts,
+  addResults,
+  addReply,
+  getPatient,
+  getConditions
+} from "./function";
 import history from "../../history";
 export default class UserStore {
   // pull data /////
@@ -52,19 +65,17 @@ export default class UserStore {
           dispatch(logIn(employee));
         })
         .then(() => {
-          apiUrl.get('/patient/patient_list')
-          .then(patients => {
+          apiUrl.get("/patient/patient_list").then(patients => {
             dispatch(getPatients(patients));
             history.push("/employee");
-          })
+          });
         })
         .catch(err => {
           console.log(err);
         });
-
     };
   };
-  static createTip = (tip) => {
+  static createTip = tip => {
     return dispatch => {
       apiUrl
         .post("/tip", tip)
@@ -79,23 +90,42 @@ export default class UserStore {
   };
   static getTips = () => {
     return dispatch => {
-      apiUrl.get('/tip')
-      .then(tips => {
-        dispatch(getTips(tips))
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    }
-  }
+      apiUrl
+        .get("/tip")
+        .then(tips => {
+          dispatch(getTips(tips));
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+  };
   static createPost = (post, user) => {
-    console.log('POST = ', post);
-    console.log('USER = ', user);
+    console.log("POST = ", post);
+    console.log("USER = ", user);
     return dispatch => {
       apiUrl
-        .post("/posts", post, {headers: { Authorization: 'Bearer ' + user.token}})
-        .then(tip => {
-          dispatch(createTip(post));
+        .post("/posts", post, {
+          headers: { Authorization: "Bearer " + user.token }
+        })
+        .then(post => {
+          dispatch(createPost(post));
+          history.push("/patient");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+  };
+  static addReply = (post, user) => {
+    const postId = post._id;
+    return dispatch => {
+      apiUrl
+        .put("/posts/" + postId + "/addReply", post, {
+          headers: { Authorization: "Bearer " + user.token }
+        })
+        .then(post => {
+          dispatch(addReply(post));
           history.push("/patient");
         })
         .catch(err => {
@@ -105,56 +135,55 @@ export default class UserStore {
   };
   static getPosts = () => {
     return dispatch => {
-      apiUrl.get('/posts')
-      .then(posts => {
-        console.log(posts);
-        dispatch(getPosts(posts))
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    }
-  }
+      apiUrl
+        .get("/posts")
+        .then(posts => {
+          console.log(posts);
+          dispatch(getPosts(posts));
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+  };
   static addResults = (id, results) => {
     console.log(id);
     return dispatch => {
-      apiUrl.put('/patient/' + id, results)
-      .then(response => {
-        history.push('patient_list');
-      })
-    }
-  }
-  static getPatient = (id) => {
+      apiUrl.put("/patient/" + id, results).then(response => {
+        history.push("patient_list");
+      });
+    };
+  };
+  static getPatient = id => {
     return dispatch => {
-      apiUrl.get('/patient/' + id)
-      .then(patient => {
+      apiUrl.get("/patient/" + id).then(patient => {
         dispatch(getPatient(patient));
-      })
-    }
-  }
-  static getConditions = (symptoms) => {
+      });
+    };
+  };
+  static getConditions = symptoms => {
     const request = {
       symptoms: symptoms
-    }
+    };
     return dispatch => {
-      apiUrl.post('/condition', symptoms)
-      .then(conditions => {
+      apiUrl.post("/condition", symptoms).then(conditions => {
         dispatch(getConditions(conditions));
-      })
-    }
-  }
-  static deleteTip = (tip) => {
+      });
+    };
+  };
+  static deleteTip = tip => {
     return dispatch => {
-      apiUrl.delete('/tip/' + tip._id)
-      .then(response => {
-        dispatch(deleteTip(tip))
-        history.push('/health_tips');
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    }
-  }
+      apiUrl
+        .delete("/tip/" + tip._id)
+        .then(response => {
+          dispatch(deleteTip(tip));
+          history.push("/health_tips");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+  };
   static logOut = () => {
     return dispatch => {
       dispatch(logOut());

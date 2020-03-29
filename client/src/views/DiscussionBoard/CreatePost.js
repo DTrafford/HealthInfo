@@ -40,13 +40,13 @@ class CreatePost extends Component {
     content: "",
     image: null,
     creatorId: "",
-    creatorName: this.props.firstName + ' ' + this.props.lastName,
+    creatorName: this.props.firstName + " " + this.props.lastName,
     imagePath: null,
     replies: []
   };
 
   componentDidMount = () => {
-    console.log('USER = ', this.props.user);
+    console.log("USER = ", this.props.user);
   };
 
   onTitleChange = event => {
@@ -77,8 +77,6 @@ class CreatePost extends Component {
       };
       reader.readAsDataURL(event.target.files[0]);
     }
-    // this.setState({ image: event.target.files[0] });
-    // this.props.updateImage(event.target.files[0]);
   };
   onImageChange2 = () => {
     this.inputElement.click();
@@ -90,12 +88,11 @@ class CreatePost extends Component {
       content: this.state.content,
       image: this.state.image,
       userId: this.props.user.userId,
-      creatorName: this.props.user.firstName + ' ' + this.props.user.lastName,
+      creatorName: this.props.user.firstName + " " + this.props.user.lastName,
       // imagePath: null,
       replies: []
-
     };
-    console.log('New Post = ', newPost);
+    console.log("New Post = ", newPost);
     this.props.createPost(newPost, this.props.user);
     // this.props.getPosts();
   };
@@ -105,59 +102,60 @@ class CreatePost extends Component {
     return (
       <PaperSheet>
         <div>
-          <h1 className='addTipTitle'>Create New Post</h1>
+          <h1 className="addTipTitle">Create New Post</h1>
           <hr />
           <form
             className={classes.container}
             noValidate
-            autoComplete='off'
-            enctype='multipart/form-data'>
+            autoComplete="off"
+            enctype="multipart/form-data"
+          >
             <TextField
-              id='outlined-title-input'
-              label='Title'
+              id="outlined-title-input"
+              label="Title"
               className={classes.textField}
-              type='text'
-              name='title'
-              margin='normal'
-              variant='outlined'
+              type="text"
+              name="title"
+              margin="normal"
+              variant="outlined"
               fullWidth
               onChange={e => this.onTitleChange(e)}
             />
             <TextField
-              id='outlined-content-flexible'
-              label='Post Message'
+              id="outlined-content-flexible"
+              label="Post Message"
               multiline
-              rowsMax='6'
+              rowsMax="6"
               onChange={e => this.onContentChange(e)}
               className={classes.textField}
-              margin='normal'
-              variant='outlined'
+              margin="normal"
+              variant="outlined"
               fullWidth
             />
             {this.state.image ? (
               <div>
                 <img
                   src={this.state.image}
-                  alt='for health tip post'
-                  className='tip_Image'
+                  alt="for health tip post"
+                  className="tip_Image"
                 />
               </div>
             ) : null}
-            <label for='image_picker' className='imagePicker_Button'>
-              <span className='imagePicker_Text'>SELECT IMAGE</span>
+            <label for="image_picker" className="imagePicker_Button">
+              <span className="imagePicker_Text">SELECT IMAGE</span>
             </label>
             <input
               ref={input => (this.inputElement = input)}
-              type='file'
+              type="file"
               onChange={e => this.onImageChange(e)}
               // onChange={this.onImageChange.bind(this)}
-              className='filetype'
-              id='image_picker'
+              className="filetype"
+              id="image_picker"
             />
             {/* <button onClick={this.onImageChange} type='button' class='submitButton'>
               Pick Image
             </button> */}
-            <button onClick={this.onSubmit} type='button' class='submitButton'>
+            <button onClick={this.onSubmit} type="button" class="submitButton">
               SUBMIT
             </button>
           </form>

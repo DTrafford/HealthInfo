@@ -29,6 +29,28 @@ const styles = theme => ({
 });
 
 class ReplyCard extends Component {
+  componentDidMount() {
+    console.log("REPLIES = ", this.props.post.replies);
+  }
+  state = {
+    post: this.props.post,
+    replyMessage: []
+  };
+
+  onReplyChange = event => {
+    this.setState({
+      replyMessage: event.target.value
+    });
+  };
+
+  onSubmit = () => {
+    const newPost = this.state.post;
+    console.log(newPost);
+    newPost.replies.push(this.state.replyMessage);
+    this.props.addReply(newPost, this.props.user);
+  };
+
+  addReplyHandler = () => {};
   render() {
     return (
       <Card
@@ -40,14 +62,14 @@ class ReplyCard extends Component {
             label="Post Message"
             multiline
             rowsMax="6"
-            onChange={e => this.onContentChange(e)}
             margin="normal"
             variant="outlined"
             fullWidth
+            onChange={e => this.onReplyChange(e)}
           />
         </CardContent>
         <CardActions>
-          <Button color="primary" size="small">
+          <Button color="primary" size="small" onClick={this.onSubmit}>
             Submit Reply
           </Button>
           {/* <Button size="small">Cancel</Button> */}
@@ -68,11 +90,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    submitReply: (reply, user) => {
-      dispatch(UserStore.createPost(reply, user));
-    },
-    getPosts: () => {
-      dispatch(UserStore.getPosts());
+    addReply: (post, user) => {
+      dispatch(UserStore.addReply(post, user));
     }
   };
 };
