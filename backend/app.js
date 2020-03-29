@@ -6,6 +6,7 @@ const cors = require('cors')
 
 const tipRoutes = require('./routes/tips');
 const patientRoutes = require('./routes/patient');
+const postRoutes = require('./routes/posts');
 const employeeRoutes = require('./routes/employee');
 const conditionRoutes = require('./routes/conditions');
 
@@ -44,6 +45,7 @@ app.use(express.static('/build'));
 app.use(express.static('/dist/PostApp'));
 app.use('/api/tip', tipRoutes);
 app.use('/api/patient', patientRoutes);
+app.use('/api/posts', postRoutes);
 app.use('/api/employee', employeeRoutes);
 app.use('/api/condition', conditionRoutes);
 app.get('/*', function(req,res) {

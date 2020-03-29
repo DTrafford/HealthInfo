@@ -18,6 +18,7 @@ class PatientLanding extends Component {
 
   componentDidMount = () => {
     this.props.getTips();
+    this.props.getPosts();
   }
 
   render() {
@@ -42,13 +43,13 @@ class PatientLanding extends Component {
               </button>
             </Link>
           </li>
-          {/* <li>
-            <Link to={"/update_info"} style={{ marginLeft: "auto" }}>
+          <li>
+            <Link to={"/patient/discussion_board"} style={{ marginLeft: "auto" }}>
               <button onClick={""} type='button' class='landingLinkButton'>
-                UPDATE INFO
+                DISCUSSION BOARD
               </button>
             </Link>
-          </li> */}
+          </li>
           <li>
             <a href='mailto:emergencysuppoert@example.com?subject=Please Help&body=I am in need of assistance'>
               <button onClick={""} type='button' class='landingLinkButton'>
@@ -75,6 +76,9 @@ const mapDispatchToProps = dispatch => {
     },
     getTips: () => {
       dispatch(UserStore.getTips());
+    },
+    getPosts: () => {
+      dispatch(UserStore.getPosts());
     },
   };
 };

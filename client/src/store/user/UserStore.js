@@ -1,7 +1,7 @@
 ///////////*****************//////// USERSTORE
 
 import { apiUrl } from "../../instances/instance";
-import { logIn, logOut, getPatients, createTip, getTips, deleteTip, addResults, getPatient, getConditions } from "./function";
+import { logIn, logOut, getPatients, createTip, getTips, deleteTip, createPost, getPosts, addResults, getPatient, getConditions } from "./function";
 import history from "../../history";
 export default class UserStore {
   // pull data /////
@@ -82,6 +82,33 @@ export default class UserStore {
       apiUrl.get('/tip')
       .then(tips => {
         dispatch(getTips(tips))
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+  }
+  static createPost = (post, user) => {
+    console.log('POST = ', post);
+    console.log('USER = ', user);
+    return dispatch => {
+      apiUrl
+        .post("/posts", post, {headers: { Authorization: 'Bearer ' + user.token}})
+        .then(tip => {
+          dispatch(createTip(post));
+          history.push("/patient");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+  };
+  static getPosts = () => {
+    return dispatch => {
+      apiUrl.get('/posts')
+      .then(posts => {
+        console.log(posts);
+        dispatch(getPosts(posts))
       })
       .catch(err => {
         console.log(err);

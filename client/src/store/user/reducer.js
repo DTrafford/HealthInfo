@@ -9,12 +9,14 @@ const initState = {
         userType: null,
         patientList: null,
         healthTips: null,
+        posts: null,
         loadedResults: null,
         conditions: null,
     },
 }
 
 export function user(state = initState, action) {
+    console.log('ACTION = ', action);
     switch (action.type) {
         case actionTypes.LOGIN:
         let userType = '';
@@ -56,6 +58,15 @@ export function user(state = initState, action) {
             return {
                 ...state,
                 healthTips: action.tips.data.tips
+            }
+        case actionTypes.CREATEPOST:
+            return {
+                ...state,
+            }
+        case actionTypes.GETPOSTS:
+            return {
+                ...state,
+                posts: action.posts.data.posts,
             }
         case actionTypes.DELETETIP:
             state.healthTips.splice(state.healthTips.indexOf(action.tip), 1);

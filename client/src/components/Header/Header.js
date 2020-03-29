@@ -60,7 +60,7 @@ class Header extends React.Component {
             </React.Fragment>) : this.props.userType === 'PT' ? (<React.Fragment>
             <Link to={'/symptoms'} className="headerLink"><Button color="inherit">Symptom Checker</Button></Link>
             <Link to={'/health_tips'} className="headerLink"><Button color="inherit">Health Tips</Button></Link>
-            {/* <Link to={'/update_info'} className="headerLink"><Button color="inherit">Update Info</Button></Link> */}
+            <Link to={'/patient/discussion_board'} className="headerLink"><Button color="inherit">Discussion Board</Button></Link>
             <Link to={'/'} className="headerLink"><Button color="inherit" onClick={this.onLogOut}>Log Out</Button></Link>
             </React.Fragment>) : 
             (<React.Fragment>

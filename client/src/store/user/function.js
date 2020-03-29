@@ -19,6 +19,12 @@ export function createTip(tip) {
 export function getTips(tips) {
     return { type: actionTypes.GETTIPS, tips }
 }
+export function createPost(post) {
+    return { type: actionTypes.CREATEPOST, post }
+}
+export function getPosts(posts) {
+    return { type: actionTypes.GETPOSTS, posts }
+}
 export function deleteTip(tip) {
     return { type: actionTypes.DELETETIP, tip }
 }
