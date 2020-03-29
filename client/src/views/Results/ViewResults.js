@@ -15,8 +15,7 @@ class ViewResults extends Component {
     if (this.props.location.state) {
     }
   };
-  componentWillUpdate() {
-  }
+
   render() {
     return (
       <PaperSheet>
@@ -26,13 +25,13 @@ class ViewResults extends Component {
               {this.props.location.state.firstName}{" "}
               {this.props.location.state.lastName} Results
             </h3>
-            <div className='ViewResultsContainer'>
+            <div className="ViewResultsContainer">
               {this.props.location.state ? (
                 this.props.patient_stats.map(result => (
                   <SimpleExpansionPanel
                     title={result.label}
                     value={result.value}
-                    className='resultPanel'
+                    className="resultPanel"
                   />
                 ))
               ) : (
@@ -61,7 +60,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ViewResults);
+export default connect(mapStateToProps, mapDispatchToProps)(ViewResults);

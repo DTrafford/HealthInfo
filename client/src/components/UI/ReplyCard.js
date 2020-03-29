@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
 import UserStore from "../../store/user/UserStore";
@@ -29,9 +27,6 @@ const styles = theme => ({
 });
 
 class ReplyCard extends Component {
-  componentDidMount() {
-    console.log("REPLIES = ", this.props.post.replies);
-  }
   state = {
     post: this.props.post,
     replyMessage: []
@@ -46,7 +41,6 @@ class ReplyCard extends Component {
   onSubmit = () => {
     const userName = this.props.user.firstName + " " + this.props.user.lastName;
     const newPost = this.state.post;
-    console.log(newPost);
     if (newPost.replies) {
       newPost.replies.push({
         user: userName,

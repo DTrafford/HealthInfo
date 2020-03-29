@@ -15,7 +15,6 @@ const initState = {
 };
 
 export function user(state = initState, action) {
-  console.log("ACTION = ", action);
   switch (action.type) {
     case actionTypes.LOGIN:
       let userType = "";

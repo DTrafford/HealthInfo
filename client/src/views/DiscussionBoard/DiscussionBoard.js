@@ -22,10 +22,6 @@ class DiscussionBoard extends Component {
     };
   }
 
-  componentWillMount() {
-    console.log(this.props.posts);
-  }
-
   deletePost = id => {
     this.props.deleteTip(id);
   };

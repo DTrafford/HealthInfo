@@ -10,7 +10,6 @@ import {
   deleteTip,
   createPost,
   getPosts,
-  addResults,
   addReply,
   getPatient,
   getConditions
@@ -162,9 +161,6 @@ export default class UserStore {
     };
   };
   static getConditions = symptoms => {
-    const request = {
-      symptoms: symptoms
-    };
     return dispatch => {
       apiUrl.post("/condition", symptoms).then(conditions => {
         dispatch(getConditions(conditions));

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import "./DiscussionBoard.css";
 import PaperSheet from "../../components/UI/Paper";
@@ -43,10 +41,6 @@ class CreatePost extends Component {
     creatorName: this.props.firstName + " " + this.props.lastName,
     imagePath: null,
     replies: []
-  };
-
-  componentDidMount = () => {
-    console.log("USER = ", this.props.user);
   };
 
   onTitleChange = event => {
@@ -92,9 +86,7 @@ class CreatePost extends Component {
       // imagePath: null,
       replies: []
     };
-    console.log("New Post = ", newPost);
     this.props.createPost(newPost, this.props.user);
-    // this.props.getPosts();
   };
 
   render() {

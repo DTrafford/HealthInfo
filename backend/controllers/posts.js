@@ -1,7 +1,6 @@
 const Post = require("../models/post");
 
 exports.createPost = (req, res, next) => {
-  console.log("IN CREATE POST (REQ) = ", req.body);
   const url = req.protocol + "://" + req.get("host");
   let fileName;
   if (req.file) {
@@ -15,7 +14,6 @@ exports.createPost = (req, res, next) => {
       imagePath: url + "/images/" + fileName
     });
   } else {
-    console.log("IN ELSE");
     post = new Post({
       title: req.body.title,
       content: req.body.content,
@@ -25,7 +23,6 @@ exports.createPost = (req, res, next) => {
       imagePath: null
     });
   }
-  console.log(post);
   post
     .save()
     .then(createdPost => {
@@ -124,7 +121,6 @@ exports.deletePost = (req, res, next) => {
   Post.deleteOne({ _id: req.params.id, creatorId: req.userData.userId })
     .then(result => {
       if (result.n > 0) {
-        console.log(result);
         res.status(200).json({ message: "Post Deleted" });
       } else {
         res.status(401).json({ message: "Not Authorized" });
