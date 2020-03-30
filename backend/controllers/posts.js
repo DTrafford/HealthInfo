@@ -1,8 +1,9 @@
 const Post = require("../models/post");
-
+let post;
 exports.createPost = (req, res, next) => {
   const url = req.protocol + "://" + req.get("host");
   let fileName;
+
   if (req.file) {
     fileName = req.file.filename;
     post = new Post({
@@ -47,14 +48,7 @@ exports.updatePost = (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
     imagePath = url + "/images/" + req.imagePath.filename;
   }
-  // fileName = req.file.filename;
-  //     post = new Post({
-  //       _id: req.body.id,
-  //       title: req.body.title,
-  //       content: req.body.content,
-  //       replies: req.body.replies,
-  //       imagePath: url + '/images/' + fileName
-  //   });
+
   post = new Post({
     _id: req.body.id,
     title: req.body.title,
@@ -65,10 +59,7 @@ exports.updatePost = (req, res, next) => {
     imagePath: imagePath
   });
   delete post._id;
-  // var updatedPost = {};
-  // updatedPost = Object.assign(updatedPost, req.body);
-  // updatedPost.imagePath = imagePath;
-  // delete updatedPost._id;
+
   Post.updateOne(
     { _id: req.params.id, creatorId: req.userData.userId },
     {
@@ -85,7 +76,6 @@ exports.updatePost = (req, res, next) => {
         res.status(200).json({ message: "Update Successful" });
       } else {
         res.status(401).json({ message: "Not Authorized" });
-        // res.status(401).json({ message: "Not authorized!" });
       }
     })
     .catch(error => {

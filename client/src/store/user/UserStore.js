@@ -22,7 +22,6 @@ export default class UserStore {
       apiUrl
         .post("/patient/signup", patient)
         .then(patient => {
-          // dispatch(logIn(patient));
           history.push("/login");
         })
         .catch(err => {
@@ -35,7 +34,6 @@ export default class UserStore {
       apiUrl
         .post("/employee/signup", employee)
         .then(patient => {
-          // dispatch(logIn(employee));
           history.push("/login");
         })
         .catch(err => {
@@ -100,8 +98,6 @@ export default class UserStore {
     };
   };
   static createPost = (post, user) => {
-    console.log("POST = ", post);
-    console.log("USER = ", user);
     return dispatch => {
       apiUrl
         .post("/posts", post, {
@@ -137,7 +133,6 @@ export default class UserStore {
       apiUrl
         .get("/posts")
         .then(posts => {
-          console.log(posts);
           dispatch(getPosts(posts));
         })
         .catch(err => {
@@ -146,7 +141,6 @@ export default class UserStore {
     };
   };
   static addResults = (id, results) => {
-    console.log(id);
     return dispatch => {
       apiUrl.put("/patient/" + id, results).then(response => {
         history.push("patient_list");

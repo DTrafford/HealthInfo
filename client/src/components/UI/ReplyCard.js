@@ -75,7 +75,6 @@ class ReplyCard extends Component {
           <Button color="primary" size="small" onClick={this.onSubmit}>
             Submit Reply
           </Button>
-          {/* <Button size="small">Cancel</Button> */}
         </CardActions>
       </Card>
     );

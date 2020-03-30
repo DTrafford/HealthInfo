@@ -88,13 +88,9 @@ exports.updatePatient = (req, res, next) => {
     { _id: req.params.id },
     {
       healthData: req.body
-    //   {
-    //     heartRate: {"label": req.body.heartRate.label, "value": req.body.heartRate.value},
-    //     bloodPressure: {"label": req.body.bloodPressure.label, "value": req.body.bloodPressure.value},
-    //     bodyWeight: {"label": req.body.bodyWeight.label, "value": req.body.bodyWeight.value},
-    // }
-  }
-  ).then(result => {
+    }
+  )
+    .then(result => {
       if (result.n > 0) {
         res.status(200).json({ message: "Update Successful", result: result });
       } else {
@@ -109,44 +105,45 @@ exports.updatePatient = (req, res, next) => {
 };
 
 exports.getPatient = (req, res, next) => {
-  Patient.findById(req.params.id).then(user => {
-    if (user) {
-      res.status(200).json(user);
-    } else {
-      res.status(404).json({message: 'User not found'});
-    }
-  })
-  .catch(error => {
-    res.status(500).json({
-      message: 'User Not Found By Server'
+  Patient.findById(req.params.id)
+    .then(user => {
+      if (user) {
+        res.status(200).json(user);
+      } else {
+        res.status(404).json({ message: "User not found" });
+      }
     })
-  })
-  }
+    .catch(error => {
+      res.status(500).json({
+        message: "User Not Found By Server"
+      });
+    });
+};
 
 exports.getPatientList = (req, res, next) => {
   const pageSize = +req.query.pagesize; // The + sign converts the strings to numbers
   const currentPage = +req.query.page;
   const patientQuery = Patient.find();
   let fetchedPatients;
-  if(pageSize && currentPage) {
-    patientQuery
-    .skip(pageSize * (currentPage - 1))
-    .limit(pageSize);
+  if (pageSize && currentPage) {
+    patientQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
   }
-  patientQuery.find().then(documents => {
-    fetchedPatients = documents;
-    return Patient.count();
-  })
-  .then(count => {
-    res.status(200).json({
-      message: 'Patients Fetched Succesfully',
-      patients: fetchedPatients,
-      totalPatients: count
+  patientQuery
+    .find()
+    .then(documents => {
+      fetchedPatients = documents;
+      return Patient.count();
+    })
+    .then(count => {
+      res.status(200).json({
+        message: "Patients Fetched Succesfully",
+        patients: fetchedPatients,
+        totalPatients: count
+      });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Could not retrieve patients"
+      });
     });
-  })
-  .catch(error => {
-    res.status(500).json({
-      message: 'Could not retrieve patients'
-    });
-  });
-}
+};

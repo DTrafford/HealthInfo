@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import "./Results.css";
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import UserStore from "../../store/user/UserStore";
 import PaperSheet from "../../components/UI/Paper";
 import {
@@ -44,14 +44,15 @@ class AddResults extends React.Component {
   };
 
   componentDidMount = () => [
-    this.props.location.state ?
-    this.setState({
-      id: this.props.location.state.patientId,
-      firstName: this.props.location.state.firstName,
-      lastName: this.props.location.state.lastName,
-      doctorName: this.props.location.state.doctorName,
-    }) : null
-  ]
+    this.props.location.state
+      ? this.setState({
+          id: this.props.location.state.patientId,
+          firstName: this.props.location.state.firstName,
+          lastName: this.props.location.state.lastName,
+          doctorName: this.props.location.state.doctorName
+        })
+      : null
+  ];
 
   onEmailChange = event => {
     this.setState({
@@ -91,11 +92,11 @@ class AddResults extends React.Component {
 
   onSubmit = event => {
     const newResults = [
-      {label: "Heart Rate", value: this.state.heartRate},
-      {label: "Blood Pressure", value: this.state.bloodPressure},
-      {label: "Body Weight", value:this.state.bodyWeight}
+      { label: "Heart Rate", value: this.state.heartRate },
+      { label: "Blood Pressure", value: this.state.bloodPressure },
+      { label: "Body Weight", value: this.state.bodyWeight }
     ];
-    this.props.addResults(this.state.id, newResults)
+    this.props.addResults(this.state.id, newResults);
   };
 
   render() {
@@ -104,87 +105,83 @@ class AddResults extends React.Component {
     return (
       <PaperSheet>
         <div>
-          <h1 className='resultsTitle'>Add New Results</h1>
+          <h1 className="resultsTitle">Add New Results</h1>
           <hr />
-          <form className={classes.container} noValidate autoComplete='off'>
+          <form className={classes.container} noValidate autoComplete="off">
             <TextField
-              id='outlined-firstName-input'
-              label='First Name'
+              id="outlined-firstName-input"
+              label="First Name"
               className={classes.textField}
-              type='text'
-              name='firstName'
-              autoComplete='name'
-              margin='normal'
-              variant='outlined'
+              type="text"
+              name="firstName"
+              autoComplete="name"
+              margin="normal"
+              variant="outlined"
               fullWidth
               value={this.state.firstName}
               onChange={e => this.onFirstNameChange(e)}
             />
             <TextField
-              id='outlined-lastName-input'
-              label='Last Name'
+              id="outlined-lastName-input"
+              label="Last Name"
               className={classes.textField}
-              type='text'
-              name='lastName'
-              autoComplete='name'
-              margin='normal'
-              variant='outlined'
+              type="text"
+              name="lastName"
+              autoComplete="name"
+              margin="normal"
+              variant="outlined"
               fullWidth
               value={this.state.lastName}
               onChange={e => this.onLastNameChange(e)}
             />
             <TextField
-              id='outlined-doctorName-input'
+              id="outlined-doctorName-input"
               label="Doctor's Name"
               className={classes.textField}
-              type='text'
-              name='doctorName'
+              type="text"
+              name="doctorName"
               autoComplete="name"
-              margin='normal'
-              variant='outlined'
+              margin="normal"
+              variant="outlined"
               fullWidth
-              // value={this.state.doctorName}
               onChange={e => this.onDoctorNameChange(e)}
             />
             <TextField
-              id='outlined-heartRate-input'
-              label='Heart Rate'
+              id="outlined-heartRate-input"
+              label="Heart Rate"
               className={classes.textField}
-              type='text'
-              name='heartRate'
-              margin='normal'
-              variant='outlined'
+              type="text"
+              name="heartRate"
+              margin="normal"
+              variant="outlined"
               fullWidth
               onChange={e => this.onHeartRateChange(e)}
             />
             <TextField
-              id='outlined-bloodPressure-input'
-              label='Blood Pressure'
+              id="outlined-bloodPressure-input"
+              label="Blood Pressure"
               className={classes.textField}
-              type='text'
-              name='bloodPressure'
-              margin='normal'
-              variant='outlined'
+              type="text"
+              name="bloodPressure"
+              margin="normal"
+              variant="outlined"
               fullWidth
               onChange={e => this.onBloodPressureChange(e)}
             />
             <TextField
-              id='outlined-bodyWeight-input'
-              label='Body Weights'
+              id="outlined-bodyWeight-input"
+              label="Body Weights"
               className={classes.textField}
-              type='text'
-              name='bodyWeight'
-              margin='normal'
-              variant='outlined'
+              type="text"
+              name="bodyWeight"
+              margin="normal"
+              variant="outlined"
               fullWidth
               onChange={e => this.onBodyWeightChange(e)}
             />
-              <button
-                onClick={this.onSubmit}
-                type='button'
-                class='submitButton'>
-                SUBMIT
-              </button>
+            <button onClick={this.onSubmit} type="button" class="submitButton">
+              SUBMIT
+            </button>
           </form>
         </div>
       </PaperSheet>
@@ -208,8 +205,11 @@ const mapDispatchToProps = dispatch => {
   return {
     addResults: (id, results) => {
       dispatch(UserStore.addResults(id, results));
-    },
+    }
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(AddResults));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(AddResults));

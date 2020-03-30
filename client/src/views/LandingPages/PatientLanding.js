@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Landing.css";
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import UserStore from "../../store/user/UserStore";
 import {
   BrowserRouter as Router,
@@ -19,40 +19,42 @@ class PatientLanding extends Component {
   componentDidMount = () => {
     this.props.getTips();
     this.props.getPosts();
-  }
+  };
 
   render() {
     return (
-      <div className='landingContainer'>
+      <div className="landingContainer">
         <h1>
           Welcome {this.props.user.firstName} {this.props.user.lastName}
-          {/* Welcome {this.state.firstName} {this.state.lastName} */}
         </h1>
         <ul>
           <li>
             <Link to={"/symptoms"} style={{ marginLeft: "auto" }}>
-              <button onClick={""} type='button' class='landingLinkButton'>
+              <button onClick={""} type="button" class="landingLinkButton">
                 SYMPTOM CHECKER
               </button>
             </Link>
           </li>
           <li>
             <Link to={"/health_tips"} style={{ marginLeft: "auto" }}>
-              <button onClick={""} type='button' class='landingLinkButton'>
+              <button onClick={""} type="button" class="landingLinkButton">
                 HEALTH TIPS
               </button>
             </Link>
           </li>
           <li>
-            <Link to={"/patient/discussion_board"} style={{ marginLeft: "auto" }}>
-              <button onClick={""} type='button' class='landingLinkButton'>
+            <Link
+              to={"/patient/discussion_board"}
+              style={{ marginLeft: "auto" }}
+            >
+              <button onClick={""} type="button" class="landingLinkButton">
                 DISCUSSION BOARD
               </button>
             </Link>
           </li>
           <li>
-            <a href='mailto:emergencysuppoert@example.com?subject=Please Help&body=I am in need of assistance'>
-              <button onClick={""} type='button' class='landingLinkButton'>
+            <a href="mailto:emergencysuppoert@example.com?subject=Please Help&body=I am in need of assistance">
+              <button onClick={""} type="button" class="landingLinkButton">
                 CONTACT EMERGENCY SERVICES
               </button>
             </a>
@@ -65,7 +67,7 @@ class PatientLanding extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user,
+    user: state.user
   };
 };
 
@@ -79,7 +81,7 @@ const mapDispatchToProps = dispatch => {
     },
     getPosts: () => {
       dispatch(UserStore.getPosts());
-    },
+    }
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PatientLanding);

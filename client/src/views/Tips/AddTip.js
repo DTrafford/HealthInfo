@@ -43,8 +43,7 @@ class AddTip extends Component {
     creatorId: ""
   };
 
-  componentDidMount = () => {
-  };
+  componentDidMount = () => {};
 
   onTitleChange = event => {
     this.setState({
@@ -80,8 +79,6 @@ class AddTip extends Component {
       };
       reader.readAsDataURL(event.target.files[0]);
     }
-    // this.setState({ image: event.target.files[0] });
-    // this.props.updateImage(event.target.files[0]);
   };
   onImageChange2 = () => {
     this.inputElement.click();
@@ -104,45 +101,46 @@ class AddTip extends Component {
     return (
       <PaperSheet>
         <div>
-          <h1 className='addTipTitle'>Add A New Health Tip</h1>
+          <h1 className="addTipTitle">Add A New Health Tip</h1>
           <hr />
           <form
             className={classes.container}
             noValidate
-            autoComplete='off'
-            enctype='multipart/form-data'>
+            autoComplete="off"
+            enctype="multipart/form-data"
+          >
             <TextField
-              id='outlined-title-input'
-              label='Title'
+              id="outlined-title-input"
+              label="Title"
               className={classes.textField}
-              type='text'
-              name='title'
-              margin='normal'
-              variant='outlined'
+              type="text"
+              name="title"
+              margin="normal"
+              variant="outlined"
               fullWidth
               onChange={e => this.onTitleChange(e)}
             />
             <TextField
-              id='outlined-url-input'
-              label='URL'
+              id="outlined-url-input"
+              label="URL"
               className={classes.textField}
-              type='text'
-              name='url'
-              margin='normal'
-              variant='outlined'
+              type="text"
+              name="url"
+              margin="normal"
+              variant="outlined"
               fullWidth
               onChange={e => this.onUrlChange(e)}
             />
             <TextField
-              id='outlined-content-flexible'
-              label='Content'
+              id="outlined-content-flexible"
+              label="Content"
               multiline
-              rowsMax='6'
+              rowsMax="6"
               //   value={this.state.multiline}
               onChange={e => this.onContentChange(e)}
               className={classes.textField}
-              margin='normal'
-              variant='outlined'
+              margin="normal"
+              variant="outlined"
               fullWidth
             />
             {/* {this.state.image ? (
@@ -165,7 +163,7 @@ class AddTip extends Component {
               className='filetype'
               id='image_picker'
             /> */}
-            <button onClick={this.onSubmit} type='button' class='submitButton'>
+            <button onClick={this.onSubmit} type="button" class="submitButton">
               SUBMIT
             </button>
           </form>

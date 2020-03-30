@@ -7,7 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import PrimaryButton from "../../UI/Buttons/PrimaryButton";
 import "./Login.css";
 import PaperSheet from "../../UI/Paper";
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import UserStore from "../../../store/user/UserStore";
 
 const styles = theme => ({
@@ -26,7 +26,6 @@ const styles = theme => ({
     width: 200
   }
 });
-
 
 class EmployeeLogin extends React.Component {
   state = {
@@ -58,36 +57,34 @@ class EmployeeLogin extends React.Component {
     const { classes } = this.props;
 
     return (
-      <PaperSheet className='logInFormCard'>
-        <div className='loginContainer'>
-          <h1 className='loginTitle'>Employee Log In</h1>
+      <PaperSheet className="logInFormCard">
+        <div className="loginContainer">
+          <h1 className="loginTitle">Employee Log In</h1>
           <hr />
-          <form className={classes.container} noValidate autoComplete='off'>
+          <form className={classes.container} noValidate autoComplete="off">
             <TextField
-              id='outlined-email-input'
-              label='Email'
+              id="outlined-email-input"
+              label="Email"
               className={classes.textField}
-              type='email'
-              name='email'
-              // autoComplete='email'
-              margin='normal'
-              variant='outlined'
+              type="email"
+              name="email"
+              autoComplete="email"
+              margin="normal"
+              variant="outlined"
               fullWidth
               onChange={e => this.onEmailChange(e)}
             />
             <TextField
-              id='outlined-password-input'
-              label='Password'
+              id="outlined-password-input"
+              label="Password"
               className={classes.textField}
-              type='password'
-              // autoComplete='current-password'
-              margin='normal'
-              variant='outlined'
+              type="password"
+              margin="normal"
+              variant="outlined"
               fullWidth
               onChange={e => this.onPasswordChange(e)}
             />
-            {/* <PrimaryButton onClick={this.onSubmit} displayText="Submit"/> */}
-            <button onClick={this.onSubmit} type='button' class='submitButton'>
+            <button onClick={this.onSubmit} type="button" class="submitButton">
               SUBMIT
             </button>
           </form>
@@ -103,7 +100,7 @@ EmployeeLogin.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    user: state.user,
+    user: state.user
   };
 };
 
@@ -111,8 +108,11 @@ const mapDispatchToProps = dispatch => {
   return {
     employeeLogIn: employee => {
       dispatch(UserStore.employeeLogIn(employee));
-    },
+    }
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(EmployeeLogin));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(EmployeeLogin));

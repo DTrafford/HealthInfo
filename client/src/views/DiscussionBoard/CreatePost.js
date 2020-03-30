@@ -83,7 +83,6 @@ class CreatePost extends Component {
       image: this.state.image,
       userId: this.props.user.userId,
       creatorName: this.props.user.firstName + " " + this.props.user.lastName,
-      // imagePath: null,
       replies: []
     };
     this.props.createPost(newPost, this.props.user);
@@ -140,13 +139,9 @@ class CreatePost extends Component {
               ref={input => (this.inputElement = input)}
               type="file"
               onChange={e => this.onImageChange(e)}
-              // onChange={this.onImageChange.bind(this)}
               className="filetype"
               id="image_picker"
             />
-            {/* <button onClick={this.onImageChange} type='button' class='submitButton'>
-              Pick Image
-            </button> */}
             <button onClick={this.onSubmit} type="button" class="submitButton">
               SUBMIT
             </button>

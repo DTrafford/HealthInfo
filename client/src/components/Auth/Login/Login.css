@@ -1,23 +1,22 @@
 .logInFormCard {
-    max-width: 50% !important;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+  max-width: 50% !important;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .loginContainer {
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .loginTitle {
-    /* text-align: left; */
-    opacity: 0.7;
+  opacity: 0.7;
 }
 .submitButton {
-    color: blue !important;
-    font-family: 'Roboto', sans-serif !important;
-    border: none;
-    font-size: 20px;
-    margin-left: auto;
+  color: blue !important;
+  font-family: "Roboto", sans-serif !important;
+  border: none;
+  font-size: 20px;
+  margin-left: auto;
 }

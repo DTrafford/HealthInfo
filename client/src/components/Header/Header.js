@@ -91,7 +91,6 @@ class Header extends React.Component {
                 <Link to={"/patient_list"} className="headerLink">
                   <Button color="inherit">Patient List</Button>
                 </Link>
-                {/* <Link to={'/update_patient'} className="headerLink"><Button color="inherit">Update Patient</Button></Link> */}
                 <Link to={"/"} className="headerLink">
                   <Button color="inherit" onClick={this.onLogOut}>
                     Log Out

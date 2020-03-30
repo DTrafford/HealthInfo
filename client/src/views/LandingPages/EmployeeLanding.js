@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Landing.css";
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import UserStore from "../../store/user/UserStore";
 import {
   BrowserRouter as Router,
@@ -14,49 +14,43 @@ class EmployeeLanding extends Component {
   state = {
     firstName: "David",
     lastName: "Trafford",
-    designation: 'MD',
-    title: ''
+    designation: "MD",
+    title: ""
   };
 
   componentDidMount = () => {
     this.props.getTips();
-  }
+  };
   render() {
     return (
-      <div className='landingContainer'>
+      <div className="landingContainer">
         <h1>
-          Welcome - {this.props.user.firstName} {this.props.user.lastName} ({this.props.user.designation})
+          Welcome - {this.props.user.firstName} {this.props.user.lastName} (
+          {this.props.user.designation})
         </h1>
-        <hr/>
+        <hr />
         <ul>
           <li>
             <Link to={"/add_tip"} style={{ marginLeft: "auto" }}>
-              <button onClick={""} type='button' class='landingLinkButton'>
+              <button onClick={""} type="button" class="landingLinkButton">
                 ADD HEALTH TIP
               </button>
             </Link>
           </li>
           <li>
             <Link to={"/health_tips"} style={{ marginLeft: "auto" }}>
-              <button onClick={""} type='button' class='landingLinkButton'>
+              <button onClick={""} type="button" class="landingLinkButton">
                 HEALTH TIPS
               </button>
             </Link>
           </li>
           <li>
             <Link to={"/patient_list"} style={{ marginLeft: "auto" }}>
-              <button onClick={""} type='button' class='landingLinkButton'>
+              <button onClick={""} type="button" class="landingLinkButton">
                 PATIENT LIST
               </button>
             </Link>
           </li>
-          {/* <li>
-            <Link to={"/update_patient"} style={{ marginLeft: "auto" }}>
-              <button onClick={""} type='button' class='landingLinkButton'>
-                UPDATE INFO
-              </button>
-            </Link>
-          </li> */}
         </ul>
       </div>
     );
@@ -77,7 +71,7 @@ const mapDispatchToProps = dispatch => {
     },
     getTips: () => {
       dispatch(UserStore.getTips());
-    },
+    }
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeLanding);
