@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Header/Header";
-// import RegisterTabs from "./components/Auth/Register/RegisterTabs";
+// TEST COMMENT
 import LoginTabs from "./components/Auth/Login/LoginTabs";
 import RegisterTabs from "./components/Auth/Register/RegisterTabs";
 import Home from "./views/Home/Home";
