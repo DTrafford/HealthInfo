@@ -7,13 +7,13 @@ import {
   Switch,
   Route,
   Link,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 
 class PatientLanding extends Component {
   state = {
     firstName: "David",
-    lastName: "Trafford"
+    lastName: "Trafford",
   };
 
   componentDidMount = () => {
@@ -30,7 +30,7 @@ class PatientLanding extends Component {
         <ul>
           <li>
             <Link to={"/symptoms"} style={{ marginLeft: "auto" }}>
-              <button onClick={""} type="button" class="landingLinkButton">
+              <button onClick={""} type="button" className="landingLinkButton">
                 SYMPTOM CHECKER
               </button>
             </Link>
@@ -65,15 +65,15 @@ class PatientLanding extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    patientLogIn: patient => {
+    patientLogIn: (patient) => {
       dispatch(UserStore.patientLogIn(patient));
     },
     getTips: () => {
@@ -81,7 +81,7 @@ const mapDispatchToProps = dispatch => {
     },
     getPosts: () => {
       dispatch(UserStore.getPosts());
-    }
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PatientLanding);

@@ -4,13 +4,20 @@ import { connect } from "react-redux";
 import UserStore from "../../store/user/UserStore";
 import PaperSheet from "../../components/UI/Paper";
 import SimpleExpansionPanel from "../../components/UI/ExpansionPanel";
+import Cookies from 'universal-cookie';
+import history from "../../history";
 
 class ViewResults extends Component {
-  componentWillMount = () => {
+  componentWillMount() {
+    const cookies = new Cookies();
+    if (!cookies.get('token')) {
+      history.push('/login')
+    }
     if (this.props.location.state) {
       this.props.getPatient(this.props.location.state.patientId);
     }
-  };
+  }
+
   componentDidMount = () => {
     if (this.props.location.state) {
     }
@@ -35,8 +42,8 @@ class ViewResults extends Component {
                   />
                 ))
               ) : (
-                <h2>No Previous Results</h2>
-              )}
+                  <h2>No Previous Results</h2>
+                )}
             </div>
           </React.Fragment>
         ) : null}

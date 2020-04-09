@@ -5,6 +5,8 @@ import UserStore from "../../store/user/UserStore";
 import PaperSheet from "../../components/UI/Paper";
 import Button from "@material-ui/core/Button";
 import PostExpansionPanel from "../../components/UI/PostExpansionPanel";
+import Cookies from 'universal-cookie';
+import history from "../../history";
 
 import {
   BrowserRouter as Router,
@@ -20,6 +22,13 @@ class DiscussionBoard extends Component {
     this.state = {
       posts: null
     };
+  }
+
+  componentWillMount() {
+    const cookies = new Cookies();
+    if (!cookies.get('token')) {
+      history.push('/login')
+    }
   }
 
   deletePost = id => {
@@ -58,8 +67,8 @@ class DiscussionBoard extends Component {
               />
             ))
           ) : (
-            <h2>No Posts Yet!</h2>
-          )}
+              <h2>No Posts Yet!</h2>
+            )}
         </div>
       </PaperSheet>
     );

@@ -14,6 +14,8 @@ import {
   Link,
   Redirect
 } from "react-router-dom";
+import Cookies from 'universal-cookie';
+import history from "../../history";
 
 const styles = theme => ({
   container: {
@@ -43,14 +45,21 @@ class AddResults extends React.Component {
     bodyWeight: ""
   };
 
+  componentWillMount() {
+    const cookies = new Cookies();
+    if (!cookies.get('token')) {
+      history.push('/login')
+    }
+  }
+
   componentDidMount = () => [
     this.props.location.state
       ? this.setState({
-          id: this.props.location.state.patientId,
-          firstName: this.props.location.state.firstName,
-          lastName: this.props.location.state.lastName,
-          doctorName: this.props.location.state.doctorName
-        })
+        id: this.props.location.state.patientId,
+        firstName: this.props.location.state.firstName,
+        lastName: this.props.location.state.lastName,
+        doctorName: this.props.location.state.doctorName
+      })
       : null
   ];
 

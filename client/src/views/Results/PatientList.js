@@ -5,8 +5,17 @@ import UserStore from "../../store/user/UserStore";
 import PaperSheet from "../../components/UI/Paper";
 import Button from "@material-ui/core/Button";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Cookies from 'universal-cookie';
+import history from "../../history";
 
 class PatientList extends Component {
+  componentWillMount() {
+    const cookies = new Cookies();
+    if (!cookies.get('token')) {
+      history.push('/login')
+    }
+  }
+
   render() {
     return (
       <PaperSheet>
